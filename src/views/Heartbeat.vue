@@ -113,6 +113,10 @@
               <span class="milestone-icon">💕</span>
               <span class="milestone-text">75% - 爱的共鸣解锁</span>
             </div>
+            <div class="milestone final-milestone" :class="{ 'reached': loveIntensity >= 100 }">
+              <span class="milestone-icon">📸</span>
+              <span class="milestone-text">100% - 婚礼照片解锁</span>
+            </div>
           </div>
         </div>
       </div>
@@ -210,8 +214,12 @@
       <button @click="playHeartbeatStory" :disabled="isAnimationPlaying" class="play-btn">
         {{ isAnimationPlaying ? '正在播放...' : '播放心跳故事' }}
       </button>
-      <button @click="nextScene" class="next-btn">
-        查看婚礼照片 →
+      <button @click="nextScene" :disabled="loveIntensity < 100" class="next-btn"
+              :class="{ 'available': loveIntensity >= 100 }">
+        {{ loveIntensity >= 100 ? '✨ 查看婚礼照片 →' : '🔒 查看婚礼照片 →' }}
+        <div class="progress-hint" v-show="loveIntensity < 100">
+          需要爱意浓度达到100%
+        </div>
       </button>
     </div>
   </div>
@@ -300,6 +308,11 @@ const startCountdown = () => {
     if (loveIntensity.value === 75 && heartsSynced.value) {
       // 75%时提示可以爱的共鸣
       showMilestoneNotification('💕 爱的共鸣功能已解锁！')
+    }
+    
+    if (loveIntensity.value === 100) {
+      // 100%时提示可以查看婚礼照片
+      showMilestoneNotification('📸 婚礼照片已解锁！现在可以查看了！')
     }
     
     // 倒计时结束时的特效
@@ -412,6 +425,10 @@ const simulateScan = () => {
   
   if (loveIntensity.value === 75 && heartsSynced.value) {
     showMilestoneNotification('💕 爱的共鸣功能已解锁！')
+  }
+  
+  if (loveIntensity.value === 100) {
+    showMilestoneNotification('📸 婚礼照片已解锁！现在可以查看了！')
   }
   
   // 如果倒计时归零
@@ -1252,6 +1269,32 @@ onUnmounted(() => {
   font-weight: bold;
 }
 
+.final-milestone {
+  border: 2px solid rgba(255, 215, 0, 0.3) !important;
+}
+
+.final-milestone.reached {
+  background: linear-gradient(45deg, rgba(255, 215, 0, 0.3), rgba(255, 165, 0, 0.3)) !important;
+  border-color: rgba(255, 215, 0, 0.8) !important;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.5) !important;
+}
+
+.final-milestone.reached .milestone-text {
+  color: #FFD700 !important;
+  font-weight: bold;
+}
+
+.final-milestone.reached .milestone-icon {
+  animation: final-celebration 1.5s infinite !important;
+}
+
+@keyframes final-celebration {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.3) rotate(15deg); }
+  50% { transform: scale(1.5) rotate(0deg); }
+  75% { transform: scale(1.3) rotate(-15deg); }
+}
+
 /* 里程碑通知 */
 .milestone-notification {
   position: fixed;
@@ -1636,9 +1679,47 @@ onUnmounted(() => {
 .next-btn {
   background: linear-gradient(45deg, #32CD32, #228B22);
   color: white;
+  position: relative;
+  overflow: hidden;
+  opacity: 0.4;
+  cursor: not-allowed;
+  filter: grayscale(50%);
+  transition: all 0.3s ease;
 }
 
-.play-btn:hover:not(:disabled), .next-btn:hover {
+.next-btn.available {
+  background: linear-gradient(45deg, #FFD700, #FFA500);
+  color: #333;
+  opacity: 1;
+  cursor: pointer;
+  filter: none;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+  animation: final-unlock-pulse 2s infinite;
+}
+
+@keyframes final-unlock-pulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+  }
+  50% { 
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 40px rgba(255, 215, 0, 0.4);
+  }
+}
+
+.progress-hint {
+  position: absolute;
+  bottom: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.7rem;
+  color: #FFB6C1;
+  opacity: 0.8;
+  white-space: nowrap;
+}
+
+.play-btn:hover:not(:disabled), .next-btn.available:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
@@ -1720,6 +1801,17 @@ onUnmounted(() => {
   .controls {
     flex-direction: column;
     align-items: center;
+  }
+  
+  .next-btn {
+    position: relative;
+  }
+  
+  .progress-hint {
+    position: static;
+    transform: none;
+    margin-top: 0.5rem;
+    font-size: 0.6rem;
   }
   
   .guest-interaction {
