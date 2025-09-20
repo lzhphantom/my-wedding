@@ -49,12 +49,19 @@
       <div class="couple-scene" ref="coupleRef">
         <div class="boy-nervous" :class="{ 'leaning': isLeaning }">
           <div class="head">
-            <div class="eyes" :class="{ 'closed': eyesClosed }">👀</div>
+            <div class="hair boy-hair"></div>
+            <div class="eyes" :class="{ 'closed': eyesClosed }">•  •</div>
+            <div class="eyebrows nervous-brows"></div>
+            <div class="blush boy-blush" v-show="isLeaning"></div>
+            <div class="mouth" :class="{ 'nervous': !eyesClosed, 'kissing': eyesClosed }"></div>
           </div>
-          <div class="body"></div>
+          <div class="body boy-body">
+            <div class="collar"></div>
+            <div class="heart-beat" v-show="isLeaning">💓</div>
+          </div>
           <div class="arms">
-            <div class="arm left"></div>
-            <div class="arm right"></div>
+            <div class="arm left" :class="{ 'reaching': isLeaning }"></div>
+            <div class="arm right" :class="{ 'reaching': isLeaning }"></div>
           </div>
           <div class="thought-bubble" v-show="showThoughts">
             💭 "好紧张..."
@@ -63,13 +70,20 @@
         
         <div class="girl-shy" :class="{ 'leaning': isLeaning }">
           <div class="head">
-            <div class="eyes" :class="{ 'closed': eyesClosed }">👀</div>
-            <div class="blush" v-show="showBlush">😊</div>
+            <div class="hair girl-hair"></div>
+            <div class="hair-accessory"></div>
+            <div class="eyes" :class="{ 'closed': eyesClosed }">•  •</div>
+            <div class="eyebrows shy-brows"></div>
+            <div class="blush girl-blush" v-show="showBlush || isLeaning">😊</div>
+            <div class="mouth" :class="{ 'shy': !eyesClosed, 'kissing': eyesClosed }"></div>
           </div>
-          <div class="body"></div>
+          <div class="body girl-body">
+            <div class="dress-details"></div>
+            <div class="heart-beat" v-show="isLeaning">💕</div>
+          </div>
           <div class="arms">
-            <div class="arm left"></div>
-            <div class="arm right"></div>
+            <div class="arm left" :class="{ 'reaching': isLeaning }"></div>
+            <div class="arm right" :class="{ 'reaching': isLeaning }"></div>
           </div>
           <div class="thought-bubble" v-show="showThoughts">
             💭 "心跳好快..."
@@ -493,6 +507,7 @@ onMounted(() => {
   height: 22px;
   border-radius: 50%;
   margin: 0 auto 5px;
+  overflow: visible;
 }
 
 .boy-nervous .head {
@@ -503,52 +518,224 @@ onMounted(() => {
   background: #F5DEB3;
 }
 
-.girl-shy .head::after {
-  content: '';
+/* 发型 */
+.boy-hair {
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 12px;
+  background: #8B4513;
+  border-radius: 50% 50% 0 0;
+}
+
+.girl-hair {
   position: absolute;
   top: -5px;
   left: 50%;
   transform: translateX(-50%);
   width: 26px;
-  height: 15px;
+  height: 18px;
   background: #8B4513;
   border-radius: 50%;
 }
 
+.hair-accessory {
+  position: absolute;
+  top: -2px;
+  right: 3px;
+  width: 5px;
+  height: 5px;
+  background: #FF69B4;
+  border-radius: 50%;
+  box-shadow: 3px 0 0 #FFB6C1, -1px 2px 0 #FF1493;
+}
+
+/* 眼睛 */
 .eyes {
   position: absolute;
-  top: 50%;
+  top: 8px;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 8px;
+  font-size: 5px;
   transition: all 0.5s ease;
+  color: #333;
+  font-weight: bold;
 }
 
 .eyes.closed {
-  opacity: 0;
+  font-size: 6px;
+  content: '—  —';
+  opacity: 0.8;
 }
 
-.blush {
+/* 眉毛 */
+.eyebrows {
   position: absolute;
-  top: 70%;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 2px;
+}
+
+.nervous-brows {
+  background: linear-gradient(45deg, #8B4513 30%, transparent 30%, transparent 70%, #8B4513 70%);
+  animation: nervous-twitch 2s infinite;
+}
+
+.shy-brows {
+  background: linear-gradient(-45deg, #8B4513 30%, transparent 30%, transparent 70%, #8B4513 70%);
+  animation: shy-flutter 3s infinite;
+}
+
+@keyframes nervous-twitch {
+  0%, 90% { transform: translateX(-50%) scaleY(1); }
+  95% { transform: translateX(-50%) scaleY(0.5); }
+}
+
+@keyframes shy-flutter {
+  0%, 80% { opacity: 1; }
+  85%, 90% { opacity: 0.3; }
+  95% { opacity: 1; }
+}
+
+/* 脸红 */
+.boy-blush {
+  position: absolute;
+  top: 10px;
+  left: 2px;
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 182, 193, 0.7);
+  border-radius: 50%;
+  box-shadow: 14px 0 0 rgba(255, 182, 193, 0.7);
+}
+
+.girl-blush {
+  position: absolute;
+  top: 12px;
   left: 50%;
   transform: translate(-50%, -50%);
-  font-size: 6px;
+  font-size: 4px;
+}
+
+/* 嘴巴 */
+.mouth {
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 2px;
+  border-radius: 0 0 4px 4px;
+  transition: all 0.5s ease;
+}
+
+.mouth.nervous {
+  border: 1px solid #333;
+  border-top: none;
+  background: transparent;
+  animation: nervous-mouth 1.5s infinite;
+}
+
+.mouth.shy {
+  width: 2px;
+  height: 2px;
+  background: #FF69B4;
+  border-radius: 50%;
+}
+
+.mouth.kissing {
+  width: 3px;
+  height: 3px;
+  background: #FF1493;
+  border-radius: 50% 50% 50% 50%;
+  transform: translateX(-50%) scale(0.8);
+}
+
+@keyframes nervous-mouth {
+  0%, 100% { width: 4px; }
+  50% { width: 2px; }
 }
 
 .body {
+  position: relative;
   width: 28px;
   height: 35px;
   margin: 0 auto 5px;
   border-radius: 10px;
 }
 
-.boy-nervous .body {
+.boy-body {
   background: #4169E1;
 }
 
-.girl-shy .body {
+.girl-body {
   background: #FF69B4;
+}
+
+/* 男生衬衫细节 */
+.collar {
+  position: absolute;
+  top: 3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 8px;
+  border: 1px solid #fff;
+  border-bottom: 2px solid #fff;
+  border-radius: 50% 50% 0 0;
+}
+
+/* 女生裙子细节 */
+.dress-details {
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 24px;
+  height: 4px;
+  background: repeating-linear-gradient(
+    90deg,
+    #FFB6C1 0px,
+    #FFB6C1 2px,
+    transparent 2px,
+    transparent 4px
+  );
+}
+
+.dress-details::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 2px;
+  background: #FF1493;
+}
+
+/* 心跳效果 */
+.heart-beat {
+  position: absolute;
+  top: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 8px;
+  animation: heartbeat-float 1.5s infinite;
+}
+
+@keyframes heartbeat-float {
+  0%, 100% { 
+    transform: translateX(-50%) translateY(0) scale(1);
+    opacity: 1;
+  }
+  50% { 
+    transform: translateX(-50%) translateY(-5px) scale(1.2);
+    opacity: 0.8;
+  }
 }
 
 .arms {
@@ -563,16 +750,45 @@ onMounted(() => {
   height: 20px;
   background: #DEB887;
   border-radius: 3px;
+  transition: all 1s ease;
 }
 
 .arm.left {
   left: 5px;
   transform: rotate(-20deg);
+  transform-origin: top;
 }
 
 .arm.right {
   right: 5px;
   transform: rotate(20deg);
+  transform-origin: top;
+}
+
+.arm.reaching {
+  animation: reach-out 2s ease-in-out infinite;
+}
+
+@keyframes reach-out {
+  0%, 100% { 
+    transform: rotate(-10deg) translateY(0); 
+  }
+  50% { 
+    transform: rotate(-5deg) translateY(-2px); 
+  }
+}
+
+.arm.right.reaching {
+  animation: reach-out-right 2s ease-in-out infinite;
+}
+
+@keyframes reach-out-right {
+  0%, 100% { 
+    transform: rotate(10deg) translateY(0); 
+  }
+  50% { 
+    transform: rotate(5deg) translateY(-2px); 
+  }
 }
 
 .thought-bubble {

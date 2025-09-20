@@ -337,10 +337,12 @@ onMounted(() => {
 }
 
 .boy-dating .head, .girl-dating .head {
+  position: relative;
   width: 18px;
   height: 18px;
   border-radius: 50%;
   margin: 0 auto 3px;
+  overflow: visible;
 }
 
 .boy-dating .head {
@@ -351,6 +353,20 @@ onMounted(() => {
   background: #F5DEB3;
 }
 
+/* 男生发型 */
+.boy-dating .head::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 16px;
+  height: 8px;
+  background: #8B4513;
+  border-radius: 50% 50% 0 0;
+}
+
+/* 女生发型 */
 .girl-dating .head::after {
   content: '';
   position: absolute;
@@ -363,7 +379,34 @@ onMounted(() => {
   border-radius: 50%;
 }
 
+/* 眼睛和笑容 */
+.boy-dating .head::after {
+  content: '•  •   ⌣';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3px;
+  color: #333;
+  text-align: center;
+  line-height: 1;
+}
+
+.girl-dating .head::before {
+  content: '•  •   ⌣';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 3px;
+  color: #333;
+  text-align: center;
+  line-height: 1;
+  z-index: 2;
+}
+
 .boy-dating .body, .girl-dating .body {
+  position: relative;
   width: 22px;
   height: 30px;
   margin: 0 auto 3px;
@@ -376,6 +419,60 @@ onMounted(() => {
 
 .girl-dating .body {
   background: #FF69B4;
+}
+
+/* 男生衬衫细节 */
+.boy-dating .body::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 6px;
+  border: 1px solid #fff;
+  border-bottom: 2px solid #fff;
+  border-radius: 50% 50% 0 0;
+}
+
+.boy-dating .body::after {
+  content: '• •';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 4px;
+  color: #fff;
+  line-height: 3px;
+}
+
+/* 女生裙子细节 */
+.girl-dating .body::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 2px;
+  background: repeating-linear-gradient(
+    90deg,
+    #FFB6C1 0px,
+    #FFB6C1 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+.girl-dating .body::after {
+  content: '';
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 22px;
+  height: 2px;
+  background: #FF1493;
 }
 
 .legs {

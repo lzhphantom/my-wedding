@@ -461,7 +461,6 @@ onUnmounted(() => {
   position: relative;
   width: 80px;
   height: 72px;
-  transform: rotate(-45deg);
   margin-bottom: 2rem;
 }
 
@@ -499,17 +498,17 @@ onUnmounted(() => {
 }
 
 @keyframes heart-beat {
-  0%, 100% { transform: rotate(-45deg) scale(1); }
-  25% { transform: rotate(-45deg) scale(1.1); }
-  50% { transform: rotate(-45deg) scale(1.2); }
-  75% { transform: rotate(-45deg) scale(1.1); }
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(1.2); }
+  75% { transform: scale(1.1); }
 }
 
 .heart-pulse {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) rotate(45deg);
+  transform: translate(-50%, -50%);
   width: 100px;
   height: 100px;
   border: 2px solid;
@@ -532,11 +531,11 @@ onUnmounted(() => {
 @keyframes pulse-wave {
   0% {
     opacity: 1;
-    transform: translate(-50%, -50%) rotate(45deg) scale(0.8);
+    transform: translate(-50%, -50%) scale(0.8);
   }
   100% {
     opacity: 0;
-    transform: translate(-50%, -50%) rotate(45deg) scale(2);
+    transform: translate(-50%, -50%) scale(2);
   }
 }
 

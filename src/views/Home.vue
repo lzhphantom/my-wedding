@@ -2,7 +2,7 @@
   <div class="home-container">
     <div class="hero-section">
       <div class="title-wrapper">
-        <h1 class="main-title">Our Love Story</h1>
+        <h1 class="main-title">我们的爱情故事</h1>
         <h2 class="subtitle">从相遇到永远</h2>
         <p class="description">点击开始，体验我们的爱情之旅</p>
       </div>
@@ -14,9 +14,10 @@
       <button 
         @click="startJourney" 
         class="start-button"
-        :class="{ pulse: !journeyStarted }"
+        :class="{ pulse: !journeyStarted, loading: isStarting }"
+        :disabled="isStarting"
       >
-        开始我们的故事
+        {{ isStarting ? '正在准备...' : '开始我们的故事' }}
       </button>
     </div>
     
@@ -53,6 +54,7 @@ const router = useRouter()
 const isHeartBeating = ref(false)
 const journeyStarted = ref(false)
 const currentChapter = ref(0)
+const isStarting = ref(false) // 新增加载状态
 
 const chapters = [
   {
@@ -100,8 +102,16 @@ const chapters = [
 ]
 
 const startJourney = () => {
+  if (isStarting.value) return // 防止重复点击
+  
+  isStarting.value = true
   isHeartBeating.value = true
   journeyStarted.value = true
+  
+  // 延迟1秒后自动跳转到第一个故事
+  setTimeout(() => {
+    router.push(chapters[0].route) // 跳转到初次相遇页面
+  }, 1000)
 }
 
 const goToChapter = (index: number) => {
@@ -169,7 +179,6 @@ onMounted(() => {
   width: 100px;
   height: 90px;
   margin: 0 auto;
-  transform: rotate(-45deg);
   transition: all 0.3s ease;
 }
 
@@ -198,10 +207,10 @@ onMounted(() => {
 }
 
 @keyframes heartbeat {
-  0%, 100% { transform: rotate(-45deg) scale(1); }
-  25% { transform: rotate(-45deg) scale(1.1); }
-  50% { transform: rotate(-45deg) scale(1.2); }
-  75% { transform: rotate(-45deg) scale(1.1); }
+  0%, 100% { transform: scale(1); }
+  25% { transform: scale(1.1); }
+  50% { transform: scale(1.2); }
+  75% { transform: scale(1.1); }
 }
 
 .start-button {
@@ -217,19 +226,36 @@ onMounted(() => {
   margin-top: 2rem;
 }
 
-.start-button:hover {
+.start-button:hover:not(:disabled) {
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+}
+
+.start-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
 }
 
 .start-button.pulse {
   animation: pulse 2s infinite;
 }
 
+.start-button.loading {
+  background: linear-gradient(45deg, #ffa500, #ff8c00);
+  animation: loading-pulse 1s infinite;
+}
+
 @keyframes pulse {
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
+}
+
+@keyframes loading-pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
 }
 
 .journey-navigation {
