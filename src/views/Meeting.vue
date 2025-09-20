@@ -97,95 +97,42 @@
           </div>
         </div>
         
-        <!-- 路人背景人物 -->
+        <!-- 路人背景人物 - 动图版 -->
         <div class="background-people">
           <!-- 从左到右的人流 -->
-          <div class="person person-1 left-to-right">
-            <div class="head"></div>
-            <div class="body"></div>
-            <div class="legs">
-              <div class="leg left"></div>
-              <div class="leg right"></div>
-            </div>
+          <div class="person person-1 left-to-right gif-person">
+            <img :src="backManGif" alt="背景人物" class="person-gif" />
           </div>
-          <div class="person person-2 left-to-right">
-            <div class="head woman"></div>
-            <div class="body woman"></div>
-            <div class="legs">
-              <div class="leg left"></div>
-              <div class="leg right"></div>
-            </div>
+          <div class="person person-2 left-to-right gif-person">
+            <img :src="backManGif" alt="背景人物" class="person-gif" />
           </div>
-          <div class="person person-3 left-to-right">
-            <div class="head"></div>
-            <div class="body tall"></div>
-            <div class="legs">
-              <div class="leg left"></div>
-              <div class="leg right"></div>
-            </div>
+          <div class="person person-3 left-to-right gif-person">
+            <img :src="backManGif" alt="背景人物" class="person-gif" />
           </div>
-          <div class="person person-4 left-to-right">
-            <div class="head child"></div>
-            <div class="body child"></div>
-            <div class="legs">
-              <div class="leg left"></div>
-              <div class="leg right"></div>
-            </div>
+          <div class="person person-4 left-to-right gif-person">
+            <img :src="backManGif" alt="背景人物" class="person-gif" />
           </div>
           
           <!-- 从右到左的人流 -->
-          <div class="person person-5 right-to-left">
-            <div class="head"></div>
-            <div class="body businessman"></div>
-            <div class="legs">
-              <div class="leg left"></div>
-              <div class="leg right"></div>
-            </div>
+          <div class="person person-5 right-to-left gif-person">
+            <img :src="backManGif" alt="背景人物" class="person-gif reverse" />
           </div>
-          <div class="person person-6 right-to-left">
-            <div class="head woman"></div>
-            <div class="body woman"></div>
-            <div class="bag"></div>
-            <div class="legs">
-              <div class="leg left"></div>
-              <div class="leg right"></div>
-            </div>
+          <div class="person person-6 right-to-left gif-person">
+            <img :src="backManGif" alt="背景人物" class="person-gif reverse" />
           </div>
-          <div class="person person-7 right-to-left">
-            <div class="head elder"></div>
-            <div class="body elder"></div>
-            <div class="legs">
-              <div class="leg left"></div>
-              <div class="leg right"></div>
-            </div>
+          <div class="person person-7 right-to-left gif-person">
+            <img :src="backManGif" alt="背景人物" class="person-gif reverse" />
           </div>
-          <div class="person person-8 right-to-left">
-            <div class="head"></div>
-            <div class="body student"></div>
-            <div class="backpack"></div>
-            <div class="legs">
-              <div class="leg left"></div>
-              <div class="leg right"></div>
-            </div>
+          <div class="person person-8 right-to-left gif-person">
+            <img :src="backManGif" alt="背景人物" class="person-gif reverse" />
           </div>
           
           <!-- 站立等车的人 -->
-          <div class="person person-waiting-1 waiting">
-            <div class="head"></div>
-            <div class="body"></div>
-            <div class="phone"></div>
-            <div class="legs">
-              <div class="leg left"></div>
-              <div class="leg right"></div>
-            </div>
+          <div class="person person-waiting-1 waiting gif-person">
+            <img :src="backManGif" alt="等车人物" class="person-gif" />
           </div>
-          <div class="person person-waiting-2 waiting">
-            <div class="head woman"></div>
-            <div class="body woman"></div>
-            <div class="legs">
-              <div class="leg left"></div>
-              <div class="leg right"></div>
-            </div>
+          <div class="person person-waiting-2 waiting gif-person">
+            <img :src="backManGif" alt="等车人物" class="person-gif" />
           </div>
         </div>
         
@@ -227,7 +174,7 @@
           ref="boyRef"
         >
           <div class="head">
-            <div class="eyes">•  •</div>
+            <div class="eyes"></div>
             <div class="nose"></div>
             <div class="mouth" :class="{ smile: boyStopped }"></div>
             <div class="hair boy-hair"></div>
@@ -255,7 +202,7 @@
           ref="girlRef"
         >
           <div class="head">
-            <div class="eyes">•  •</div>
+            <div class="eyes"></div>
             <div class="nose"></div>
             <div class="mouth" :class="{ smile: girlStopped }"></div>
             <div class="hair girl-hair"></div>
@@ -304,6 +251,8 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { gsap } from 'gsap'
+// 导入动图资源
+import backManGif from '@/static/img/back_man.gif'
 
 const router = useRouter()
 const boyRef = ref<HTMLElement>()
@@ -595,9 +544,9 @@ onMounted(() => {
 .subway-train {
   position: absolute;
   bottom: 25%;
-  left: -300px;
-  width: 200px;
-  height: 40px;
+  left: -400px;
+  width: 320px;
+  height: 60px;
   animation: train-pass 4s ease-in-out;
 }
 
@@ -612,30 +561,30 @@ onMounted(() => {
 
 .train-windows {
   position: absolute;
-  top: 8px;
-  left: 10px;
+  top: 12px;
+  left: 15px;
   display: flex;
-  gap: 8px;
+  gap: 12px;
 }
 
 .window {
-  width: 25px;
-  height: 15px;
+  width: 40px;
+  height: 25px;
   background: #4169E1;
-  border-radius: 3px;
-  border: 1px solid #2F4F4F;
-  box-shadow: inset 0 0 5px rgba(255,255,255,0.3);
+  border-radius: 4px;
+  border: 2px solid #2F4F4F;
+  box-shadow: inset 0 0 8px rgba(255,255,255,0.3);
 }
 
 .train-door {
   position: absolute;
-  right: 15px;
-  top: 5px;
-  width: 20px;
-  height: 25px;
+  right: 20px;
+  top: 8px;
+  width: 30px;
+  height: 40px;
   background: #696969;
-  border-radius: 3px;
-  border: 1px solid #2F4F4F;
+  border-radius: 4px;
+  border: 2px solid #2F4F4F;
 }
 
 .door-line {
@@ -643,25 +592,25 @@ onMounted(() => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 1px;
+  width: 2px;
   height: 80%;
   background: #2F4F4F;
 }
 
 .train-sound {
   position: absolute;
-  top: -25px;
+  top: -35px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 16px;
+  font-size: 24px;
   animation: train-sound 0.5s infinite;
 }
 
 @keyframes train-pass {
-  0% { left: -300px; }
+  0% { left: -400px; }
   30% { left: 50%; transform: translateX(-50%); }
   70% { left: 50%; transform: translateX(-50%); }
-  100% { left: calc(100% + 100px); }
+  100% { left: calc(100% + 150px); }
 }
 
 @keyframes train-sound {
@@ -778,7 +727,7 @@ onMounted(() => {
   100% { opacity: 1; }
 }
 
-/* 背景路人 */
+/* 背景人物 - 动图版 */
 .background-people {
   position: absolute;
   bottom: 25%;
@@ -788,15 +737,36 @@ onMounted(() => {
 
 .person {
   position: absolute;
-  width: 20px;
+  width: 40px;
   height: 40px;
-  opacity: 0.7;
+  opacity: 0.8;
   transition: all 0.3s ease;
+}
+
+/* 动图人物样式 */
+.gif-person {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.person-gif {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+/* 反向动图（从右到左的人流） */
+.person-gif.reverse {
+  transform: scaleX(-1);
 }
 
 /* 从左到右的人流 */
 .left-to-right {
-  animation: walk-left-to-right 10s infinite linear;
+  animation: gif-walk-left-to-right 10s infinite linear;
 }
 
 .person-1 {
@@ -817,7 +787,7 @@ onMounted(() => {
 
 /* 从右到左的人流 */
 .right-to-left {
-  animation: walk-right-to-left 12s infinite linear;
+  animation: gif-walk-right-to-left 12s infinite linear;
 }
 
 .person-5 {
@@ -838,7 +808,7 @@ onMounted(() => {
 
 /* 等车的人 */
 .waiting {
-  animation: subtle-movement 3s infinite ease-in-out;
+  animation: gif-waiting-movement 4s infinite ease-in-out;
 }
 
 .person-waiting-1 {
@@ -848,215 +818,74 @@ onMounted(() => {
 
 .person-waiting-2 {
   left: 75%;
-  animation-delay: 1.5s;
+  animation-delay: 2s;
 }
 
-/* 人物基础样式 */
-.person .head {
-  width: 8px;
-  height: 8px;
-  background: #DEB887;
-  border-radius: 50%;
-  margin: 0 auto 2px;
-  position: relative;
-}
-
-.person .head.woman {
-  background: #F5DEB3;
-}
-
-.person .head.woman::after {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 10px;
-  height: 6px;
-  background: #8B4513;
-  border-radius: 50% 50% 0 0;
-}
-
-.person .head.child {
-  width: 6px;
-  height: 6px;
-  background: #FDBCB4;
-}
-
-.person .head.elder {
-  background: #D2B48C;
-}
-
-.person .head.elder::after {
-  content: '';
-  position: absolute;
-  top: -1px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 4px;
-  background: #C0C0C0;
-  border-radius: 50% 50% 0 0;
-}
-
-.person .body {
-  width: 12px;
-  height: 25px;
-  background: #666;
-  border-radius: 6px;
-  margin: 0 auto;
-  position: relative;
-}
-
-.person .body.woman {
-  background: #FF69B4;
-  width: 14px;
-  border-radius: 7px 7px 20px 20px;
-}
-
-.person .body.child {
-  width: 10px;
-  height: 18px;
-  background: #32CD32;
-}
-
-.person .body.businessman {
-  background: #2F4F4F;
-}
-
-.person .body.businessman::after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 8px;
-  height: 3px;
-  background: #FF0000;
-  border-radius: 0 0 4px 4px;
-}
-
-.person .body.elder {
-  background: #8B4513;
-}
-
-.person .body.student {
-  background: #4169E1;
-}
-
-.person .legs {
-  display: flex;
-  justify-content: space-between;
-  width: 8px;
-  margin: 0 auto;
-  gap: 2px;
-}
-
-.person .leg {
-  width: 3px;
-  height: 8px;
-  background: #8B4513;
-  border-radius: 0 0 3px 3px;
-}
-
-/* 配件 */
-.person .bag {
-  position: absolute;
-  top: 10px;
-  right: -3px;
-  width: 4px;
-  height: 6px;
-  background: #8B4513;
-  border-radius: 1px;
-}
-
-.person .backpack {
-  position: absolute;
-  top: 5px;
-  right: -2px;
-  width: 6px;
-  height: 10px;
-  background: #228B22;
-  border-radius: 2px;
-}
-
-.person .phone {
-  position: absolute;
-  top: 5px;
-  right: -2px;
-  width: 2px;
-  height: 4px;
-  background: #000;
-  border-radius: 1px;
-}
-
-/* 行走动画 */
-@keyframes walk-left-to-right {
+/* 动图人物动画 */
+@keyframes gif-walk-left-to-right {
   0% { 
-    transform: translateX(-50px);
+    transform: translateX(-60px);
     opacity: 0;
   }
   5% {
-    opacity: 0.7;
+    opacity: 0.8;
   }
   95% {
-    opacity: 0.7;
+    opacity: 0.8;
   }
   100% { 
-    transform: translateX(calc(100vw + 50px));
+    transform: translateX(calc(100vw + 60px));
     opacity: 0;
   }
 }
 
-@keyframes walk-right-to-left {
+@keyframes gif-walk-right-to-left {
   0% { 
-    transform: translateX(calc(100vw + 50px));
+    transform: translateX(calc(100vw + 60px));
     opacity: 0;
   }
   5% {
-    opacity: 0.7;
+    opacity: 0.8;
   }
   95% {
-    opacity: 0.7;
+    opacity: 0.8;
   }
   100% { 
-    transform: translateX(-50px);
+    transform: translateX(-60px);
     opacity: 0;
   }
 }
 
-@keyframes subtle-movement {
+@keyframes gif-waiting-movement {
   0%, 100% { 
-    transform: translateY(0) translateX(0);
+    transform: translateY(0) scale(1);
   }
   25% {
-    transform: translateY(-1px) translateX(1px);
+    transform: translateY(-2px) scale(1.02);
   }
   50% {
-    transform: translateY(0) translateX(0);
+    transform: translateY(-1px) scale(1.01);
   }
   75% {
-    transform: translateY(-1px) translateX(-1px);
+    transform: translateY(-3px) scale(1.03);
   }
 }
 
-/* 行走时腿部动画 */
-.left-to-right .leg, .right-to-left .leg {
-  animation: walking-legs 0.6s infinite alternate;
+/* 鼠标悬停效果 */
+.gif-person:hover .person-gif {
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
 }
 
-.left-to-right .leg.right, .right-to-left .leg.right {
-  animation-delay: 0.3s;
+.gif-person:hover .person-gif.reverse {
+  transform: scaleX(-1) scale(1.1);
 }
 
-@keyframes walking-legs {
-  from { 
-    transform: translateY(0) rotate(-5deg); 
-  }
-  to { 
-    transform: translateY(-2px) rotate(5deg); 
-  }
-}
+
+
+
+
+
 
 /* 地铁站内设施 */
 .station-facilities {
@@ -1333,270 +1162,512 @@ onMounted(() => {
 
 .head {
   position: relative;
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
-  margin: 0 auto 5px;
+  margin: 0 auto 2px;
   overflow: visible;
+  border: 2px solid #333;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
 .boy .head {
-  background: #DEB887;
+  background: radial-gradient(circle at 30% 30%, #F5DEB3, #DEB887);
 }
 
 .girl .head {
-  background: #F5DEB3;
+  background: radial-gradient(circle at 30% 30%, #FFEFD5, #F5DEB3);
 }
 
-/* 眼睛 */
+/* 动漫风格眼睛 */
 .eyes {
   position: absolute;
-  top: 6px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 4px;
-  color: #333;
-  font-weight: bold;
-  letter-spacing: 2px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  width: 16px;
+  height: 8px;
 }
 
-/* 鼻子 */
+.eyes::before,
+.eyes::after {
+  content: '';
+  width: 5px;
+  height: 7px;
+  background: radial-gradient(circle, #000 30%, #333 70%);
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  box-shadow: 
+    inset 1px 1px 2px rgba(255,255,255,0.8),
+    0 0 3px rgba(0,0,0,0.3);
+  animation: anime-blink 4s infinite;
+}
+
+.eyes::before {
+  position: absolute;
+  left: 0;
+}
+
+.eyes::after {
+  position: absolute;
+  right: 0;
+}
+
+/* 眨眼动画 */
+@keyframes anime-blink {
+  0%, 90%, 100% { 
+    transform: scaleY(1);
+  }
+  95% { 
+    transform: scaleY(0.1);
+  }
+}
+
+/* 可爱的腮红 */
+.head::before {
+  content: '';
+  position: absolute;
+  top: 15px;
+  left: 3px;
+  width: 4px;
+  height: 3px;
+  background: rgba(255, 182, 193, 0.8);
+  border-radius: 50%;
+  box-shadow: 18px 0 0 rgba(255, 182, 193, 0.8);
+}
+
+/* 动漫鼻子 */
 .nose {
   position: absolute;
-  top: 9px;
+  top: 16px;
   left: 50%;
   transform: translateX(-50%);
-  width: 1px;
-  height: 2px;
-  background: #333;
+  width: 2px;
+  height: 1px;
+  background: rgba(0,0,0,0.3);
   border-radius: 50%;
+  box-shadow: 0 1px 1px rgba(255,255,255,0.5);
 }
 
-/* 嘴巴 */
+/* 动漫嘴巴 */
 .mouth {
   position: absolute;
-  top: 12px;
+  top: 20px;
   left: 50%;
   transform: translateX(-50%);
-  width: 3px;
-  height: 1px;
-  background: #333;
-  border-radius: 0 0 3px 3px;
+  width: 6px;
+  height: 3px;
+  border: 1px solid #333;
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  background: rgba(255,255,255,0.9);
   transition: all 0.3s ease;
 }
 
 .mouth.smile {
-  width: 6px;
-  height: 2px;
-  border: 1px solid #333;
-  border-top: none;
-  background: transparent;
-  border-radius: 0 0 6px 6px;
+  width: 10px;
+  height: 5px;
+  border-radius: 0 0 10px 10px;
+  animation: smile-sparkle 0.5s ease-out;
 }
 
-/* 男生发型 */
+@keyframes smile-sparkle {
+  0% { box-shadow: 0 0 0 rgba(255,215,0,0); }
+  50% { box-shadow: 0 0 10px rgba(255,215,0,0.8); }
+  100% { box-shadow: 0 0 0 rgba(255,215,0,0); }
+}
+
+/* 动漫风格男生发型 */
 .boy-hair {
   position: absolute;
-  top: -3px;
+  top: -8px;
   left: 50%;
   transform: translateX(-50%);
-  width: 18px;
-  height: 10px;
-  background: #8B4513;
-  border-radius: 50% 50% 0 0;
+  width: 24px;
+  height: 16px;
+  background: linear-gradient(135deg, #8B4513, #A0522D, #8B4513);
+  border-radius: 50% 50% 20% 20%;
+  border: 2px solid #654321;
+  box-shadow: 
+    inset 2px 2px 4px rgba(160,82,45,0.8),
+    0 2px 6px rgba(0,0,0,0.3);
 }
 
-/* 女生发型 */
+.boy-hair::before {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  width: 6px;
+  height: 8px;
+  background: #A0522D;
+  border-radius: 0 80% 60% 40%;
+  transform: rotate(-20deg);
+}
+
+.boy-hair::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  right: 3px;
+  width: 6px;
+  height: 8px;
+  background: #A0522D;
+  border-radius: 80% 0 40% 60%;
+  transform: rotate(20deg);
+}
+
+/* 动漫风格女生发型 */
 .girl-hair {
   position: absolute;
-  top: -5px;
+  top: -10px;
   left: 50%;
   transform: translateX(-50%);
-  width: 22px;
-  height: 15px;
-  background: #8B4513;
-  border-radius: 50%;
+  width: 30px;
+  height: 20px;
+  background: linear-gradient(135deg, #8B4513, #CD853F, #8B4513);
+  border-radius: 60% 60% 30% 30%;
+  border: 2px solid #654321;
+  box-shadow: 
+    inset 2px 2px 6px rgba(205,133,63,0.8),
+    0 3px 8px rgba(0,0,0,0.3);
 }
 
-/* 发饰 */
+.girl-hair::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -4px;
+  width: 8px;
+  height: 12px;
+  background: #CD853F;
+  border-radius: 60% 20% 80% 40%;
+  transform: rotate(-30deg);
+  box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.girl-hair::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -4px;
+  width: 8px;
+  height: 12px;
+  background: #CD853F;
+  border-radius: 20% 60% 40% 80%;
+  transform: rotate(30deg);
+  box-shadow: -2px 2px 4px rgba(0,0,0,0.2);
+}
+
+/* 可爱的发饰 */
 .hair-accessory {
   position: absolute;
-  top: -3px;
+  top: -5px;
   right: 2px;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle, #FF69B4, #FF1493);
+  border-radius: 50%;
+  border: 1px solid #C71585;
+  box-shadow: 
+    0 0 6px rgba(255,105,180,0.8),
+    inset 1px 1px 2px rgba(255,255,255,0.6);
+  animation: accessory-twinkle 2s infinite ease-in-out;
+}
+
+.hair-accessory::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  right: -4px;
   width: 4px;
   height: 4px;
-  background: #FF69B4;
+  background: #FFB6C1;
   border-radius: 50%;
-  box-shadow: 2px 0 0 #FFB6C1;
+  box-shadow: 0 0 4px rgba(255,182,193,0.8);
+}
+
+@keyframes accessory-twinkle {
+  0%, 100% { 
+    transform: scale(1) rotate(0deg);
+    box-shadow: 0 0 6px rgba(255,105,180,0.8);
+  }
+  50% { 
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 12px rgba(255,105,180,1);
+  }
 }
 
 .body {
   position: relative;
-  width: 25px;
-  height: 35px;
-  margin: 0 auto 5px;
-  border-radius: 10px;
+  width: 32px;
+  height: 40px;
+  margin: 0 auto 2px;
+  border-radius: 16px;
+  border: 2px solid #333;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  overflow: hidden;
 }
 
 .boy .body {
-  background: #4169E1;
+  background: linear-gradient(135deg, #4169E1, #6495ED, #4169E1);
+  position: relative;
+}
+
+.boy .body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, 
+    transparent 20%, 
+    rgba(255,255,255,0.3) 50%, 
+    transparent 80%);
+  border-radius: 16px 16px 0 0;
 }
 
 .girl .body {
-  background: #FF69B4;
+  background: linear-gradient(135deg, #FF69B4, #FFB6C1, #FF69B4);
+  border-radius: 16px 16px 25px 25px;
+  position: relative;
+}
+
+.girl .body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, 
+    transparent 20%, 
+    rgba(255,255,255,0.4) 50%, 
+    transparent 80%);
+  border-radius: 16px 16px 0 0;
 }
 
 /* 男生衬衫领子 */
 .collar {
   position: absolute;
-  top: 2px;
+  top: 4px;
   left: 50%;
   transform: translateX(-50%);
-  width: 12px;
-  height: 8px;
-  border: 1px solid #fff;
-  border-bottom: 2px solid #fff;
-  border-radius: 50% 50% 0 0;
+  width: 16px;
+  height: 10px;
+  border: 2px solid #fff;
+  border-bottom: 3px solid #fff;
+  border-radius: 50% 50% 20% 20%;
+  background: rgba(255,255,255,0.1);
+  box-shadow: inset 0 2px 4px rgba(255,255,255,0.3);
 }
 
 /* 男生衬衫按钮 */
 .buttons {
   position: absolute;
-  top: 12px;
+  top: 16px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .button {
-  width: 2px;
-  height: 2px;
+  width: 3px;
+  height: 3px;
   background: #fff;
   border-radius: 50%;
+  box-shadow: 
+    0 1px 2px rgba(0,0,0,0.3),
+    inset 0 1px 1px rgba(255,255,255,0.8);
+  border: 1px solid #ddd;
 }
 
 /* 女生裙子花纹 */
 .dress-pattern {
   position: absolute;
-  top: 8px;
+  top: 12px;
   left: 50%;
   transform: translateX(-50%);
-  width: 20px;
-  height: 3px;
+  width: 26px;
+  height: 4px;
   background: repeating-linear-gradient(
     90deg,
-    #FFB6C1 0px,
-    #FFB6C1 2px,
-    transparent 2px,
-    transparent 4px
+    rgba(255,255,255,0.6) 0px,
+    rgba(255,255,255,0.6) 3px,
+    transparent 3px,
+    transparent 6px
   );
+  border-radius: 2px;
+}
+
+.dress-pattern::after {
+  content: '♡ ♡ ♡';
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 6px;
+  color: rgba(255,255,255,0.8);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
 /* 女生腰带 */
 .belt {
   position: absolute;
-  top: 15px;
+  top: 22px;
   left: 50%;
   transform: translateX(-50%);
-  width: 25px;
-  height: 2px;
-  background: #FF1493;
+  width: 28px;
+  height: 3px;
+  background: linear-gradient(90deg, #FF1493, #FF69B4, #FF1493);
+  border-radius: 2px;
+  box-shadow: 
+    0 1px 3px rgba(0,0,0,0.3),
+    inset 0 1px 1px rgba(255,255,255,0.4);
 }
 
-/* 手臂 */
+.belt::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 5px;
+  background: #FFD700;
+  border-radius: 1px;
+  border: 1px solid #DAA520;
+  box-shadow: inset 0 1px 1px rgba(255,255,255,0.6);
+}
+
+/* 动漫风格手臂 */
 .arms {
   position: absolute;
-  top: 25px;
+  top: 30px;
   width: 100%;
 }
 
 .arm {
   position: absolute;
-  width: 6px;
-  height: 20px;
-  background: #DEB887;
-  border-radius: 3px;
+  width: 8px;
+  height: 24px;
+  background: radial-gradient(ellipse, #F5DEB3, #DEB887);
+  border-radius: 4px;
+  border: 1px solid #333;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
   transition: all 0.3s ease;
 }
 
 .arm.left {
-  left: 8px;
-  transform: rotate(-20deg);
+  left: 10px;
+  transform: rotate(-25deg);
   transform-origin: top;
 }
 
 .arm.right {
-  right: 8px;
-  transform: rotate(20deg);
+  right: 10px;
+  transform: rotate(25deg);
   transform-origin: top;
 }
 
 .arm.waving {
-  animation: wave 0.8s ease-in-out infinite;
+  animation: anime-wave 0.6s ease-in-out infinite;
+  box-shadow: 0 0 8px rgba(255,215,0,0.6);
 }
 
-@keyframes wave {
-  0%, 100% { transform: rotate(20deg); }
-  50% { transform: rotate(-10deg); }
+@keyframes anime-wave {
+  0%, 100% { 
+    transform: rotate(25deg) scale(1);
+  }
+  25% {
+    transform: rotate(-5deg) scale(1.05);
+  }
+  50% { 
+    transform: rotate(35deg) scale(1.1);
+  }
+  75% {
+    transform: rotate(10deg) scale(1.05);
+  }
 }
 
+/* 动漫风格腿部 */
 .legs {
   display: flex;
   justify-content: space-between;
-  width: 20px;
+  width: 24px;
   margin: 0 auto;
   position: relative;
-  top: 5px;
+  top: 3px;
+  gap: 4px;
 }
 
 .leg {
-  width: 8px;
-  height: 20px;
-  background: #8B4513;
-  border-radius: 0 0 10px 10px;
+  width: 10px;
+  height: 24px;
+  background: linear-gradient(to bottom, #8B4513, #A0522D);
+  border-radius: 0 0 12px 12px;
+  border: 1px solid #654321;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   position: relative;
 }
 
 .leg::after {
   content: '';
   position: absolute;
-  bottom: -3px;
+  bottom: -4px;
   left: 50%;
   transform: translateX(-50%);
-  width: 10px;
-  height: 4px;
-  background: #654321;
+  width: 14px;
+  height: 6px;
+  background: linear-gradient(to right, #654321, #8B4513, #654321);
   border-radius: 50%;
+  border: 1px solid #333;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.4);
 }
 
 .walking .leg {
-  animation: walking 0.5s infinite alternate;
+  animation: anime-walking 0.5s infinite alternate;
 }
 
 .walking .leg.right {
   animation-delay: 0.25s;
 }
 
-@keyframes walking {
+@keyframes anime-walking {
   from { 
-    transform: translateY(0) rotate(-10deg); 
-    background: #8B4513;
+    transform: translateY(0) rotate(-8deg) scale(1); 
+    background: linear-gradient(to bottom, #8B4513, #A0522D);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
   }
   to { 
-    transform: translateY(-5px) rotate(10deg); 
-    background: #A0522D;
+    transform: translateY(-6px) rotate(8deg) scale(1.02); 
+    background: linear-gradient(to bottom, #A0522D, #CD853F);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
   }
 }
 
 .stopped {
-  animation: bounce 0.5s ease-out;
+  animation: anime-bounce 0.8s ease-out;
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+@keyframes anime-bounce {
+  0%, 100% { 
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-8px) scale(1.05);
+  }
+  50% { 
+    transform: translateY(-12px) scale(1.1);
+  }
+  75% {
+    transform: translateY(-4px) scale(1.02);
+  }
 }
 
 .hearts-effect {
