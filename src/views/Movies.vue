@@ -4,7 +4,7 @@
       <div class="cinema-exterior" v-show="!insideCinema">
         <div class="cinema-building">
           <div class="cinema-sign">
-            <div class="neon-text">CINEMA</div>
+            <div class="neon-text">电影院</div>
             <div class="movie-title">{{ currentMovie.title }}</div>
           </div>
           <div class="entrance">
@@ -145,21 +145,21 @@ const isPlaying = ref(false)
 const movies = [
   {
     id: 1,
-    title: '泰坦尼克号',
+    title: '多幸运遇见你',
     genre: 'romance',
     genre_name: '浪漫爱情',
     poster: '🚢'
   },
   {
     id: 2,
-    title: '阿凡达',
+    title: '流浪地球2',
     genre: 'adventure',
     genre_name: '科幻冒险',
     poster: '🌍'
   },
   {
     id: 3,
-    title: '罗马假日',
+    title: '我爱你！',
     genre: 'romance',
     genre_name: '经典爱情',
     poster: '🏛️'

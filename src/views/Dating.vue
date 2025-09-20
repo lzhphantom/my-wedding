@@ -329,17 +329,197 @@
           </div>
         </div>
         
-        <!-- 星空背景元素 -->
-        <div v-show="currentBackground === 'starry'" class="starry-elements">
-          <div class="cosmic-scene">
-            <div class="shooting-stars">
-              <div class="shooting-star" v-for="n in 3" :key="n"></div>
+        <!-- 流星雨许愿场景 - 重新规划 -->
+        <div v-show="currentBackground === 'starry'" class="starry-wishing-scene">
+          <!-- 深邃星空背景 -->
+          <div class="deep-space-bg">
+            <!-- 星空渐变层 -->
+            <div class="cosmic-gradient"></div>
+            
+            <!-- 背景繁星 -->
+            <div class="background-stars">
+              <div class="bg-star" v-for="n in 120" :key="'bg-' + n" 
+                   :style="{ 
+                     left: Math.random() * 100 + '%', 
+                     top: Math.random() * 100 + '%',
+                     animationDelay: Math.random() * 6 + 's',
+                     transform: 'scale(' + (0.3 + Math.random() * 0.7) + ')'
+                   }"></div>
             </div>
-            <div class="constellation">
-              <div class="star-cluster" v-for="n in 4" :key="n"></div>
+            
+            <!-- 壮观流星雨 -->
+            <div class="epic-meteor-shower">
+              <!-- 主要流星群（从右上到左下） -->
+              <div class="meteor-stream primary-stream">
+                <div class="shooting-star major-meteor" v-for="n in 8" :key="'major-' + n" 
+                     :style="{ 
+                       left: (80 + n * 5) + '%', 
+                       top: (n * 8 - 20) + '%',
+                       animationDelay: (n * 1.2 + Math.random() * 3) + 's',
+                       animationDuration: (2.5 + Math.random() * 1.5) + 's'
+                     }">
+                  <div class="meteor-head"></div>
+                  <div class="meteor-trail-long"></div>
+                  <div class="meteor-glow"></div>
+                  <div class="meteor-plasma"></div>
+                </div>
+              </div>
+              
+              <!-- 密集流星群 -->
+              <div class="meteor-stream dense-stream">
+                <div class="shooting-star regular-meteor" v-for="n in 15" :key="'reg-' + n" 
+                     :style="{ 
+                       left: (70 + n * 6 + Math.random() * 10) + '%', 
+                       top: (n * 5 + Math.random() * 15) + '%',
+                       animationDelay: (n * 0.8 + Math.random() * 4) + 's',
+                       animationDuration: (1.8 + Math.random() * 1.2) + 's'
+                     }">
+                  <div class="meteor-head"></div>
+                  <div class="meteor-trail-medium"></div>
+                  <div class="meteor-glow"></div>
+                </div>
+              </div>
+              
+              <!-- 快速流星群 -->
+              <div class="meteor-stream fast-stream">
+                <div class="shooting-star fast-meteor" v-for="n in 25" :key="'fast-' + n" 
+                     :style="{ 
+                       left: (60 + n * 3 + Math.random() * 20) + '%', 
+                       top: (n * 3 + Math.random() * 25) + '%',
+                       animationDelay: (n * 0.4 + Math.random() * 5) + 's',
+                       animationDuration: (1.2 + Math.random() * 0.8) + 's'
+                     }">
+                  <div class="meteor-head"></div>
+                  <div class="meteor-trail-short"></div>
+                  <div class="meteor-glow"></div>
+                </div>
+              </div>
             </div>
-            <div class="crescent-moon"></div>
-            <div class="galaxy-swirl"></div>
+            
+            <!-- 真实流星许愿区域 -->
+            <div class="realistic-wishing-stars">
+              <!-- 主许愿流星 -->
+              <div class="primary-wishing-star" style="left: 15%; top: 8%; animation-delay: 3s;">
+                <div class="meteor-head">
+                  <div class="core-bright"></div>
+                  <div class="core-glow"></div>
+                </div>
+                <div class="meteor-tail">
+                  <div class="tail-gradient"></div>
+                  <div class="tail-sparkles">
+                    <div class="tail-spark" v-for="n in 8" :key="'primary-spark-' + n"></div>
+                  </div>
+                </div>
+                <div class="atmospheric-glow"></div>
+                <div class="ionization-trail"></div>
+              </div>
+              
+              <!-- 次要许愿流星 -->
+              <div class="secondary-wishing-star" style="right: 20%; top: 12%; animation-delay: 7s;">
+                <div class="meteor-head">
+                  <div class="core-bright"></div>
+                  <div class="core-glow"></div>
+                </div>
+                <div class="meteor-tail">
+                  <div class="tail-gradient"></div>
+                  <div class="tail-sparkles">
+                    <div class="tail-spark" v-for="n in 6" :key="'secondary-spark-' + n"></div>
+                  </div>
+                </div>
+                <div class="atmospheric-glow"></div>
+                <div class="ionization-trail"></div>
+              </div>
+              
+              <!-- 远程许愿流星 -->
+              <div class="distant-wishing-star" style="left: 55%; top: 6%; animation-delay: 11s;">
+                <div class="meteor-head">
+                  <div class="core-bright"></div>
+                  <div class="core-glow"></div>
+                </div>
+                <div class="meteor-tail">
+                  <div class="tail-gradient"></div>
+                  <div class="tail-sparkles">
+                    <div class="tail-spark" v-for="n in 4" :key="'distant-spark-' + n"></div>
+                  </div>
+                </div>
+                <div class="atmospheric-glow"></div>
+              </div>
+              
+              <!-- 微粒尘埃轨迹 -->
+              <div class="debris-particles">
+                <div class="debris-particle" v-for="n in 25" :key="'debris-' + n" 
+                     :style="{ 
+                       left: Math.random() * 100 + '%', 
+                       top: Math.random() * 80 + '%',
+                       animationDelay: Math.random() * 15 + 's',
+                       animationDuration: (8 + Math.random() * 4) + 's'
+                     }"></div>
+              </div>
+              
+              <!-- 大气层光晕效果 -->
+              <div class="atmospheric-effects">
+                <div class="atmosphere-layer layer-1"></div>
+                <div class="atmosphere-layer layer-2"></div>
+                <div class="atmosphere-layer layer-3"></div>
+              </div>
+            </div>
+            
+            <!-- 浪漫月亮 -->
+            <div class="dreamy-moon">
+              <div class="moon-orb">
+                <div class="moon-surface">
+                  <div class="crater" v-for="n in 4" :key="n"></div>
+                </div>
+                <div class="moon-halo"></div>
+                <div class="moon-rays">
+                  <div class="ray" v-for="n in 8" :key="n" :style="{ transform: 'rotate(' + (n * 45) + 'deg)' }"></div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 许愿氛围 -->
+            <div class="wishing-atmosphere">
+              <!-- 许愿粒子 -->
+              <div class="wish-particles">
+                <div class="wish-particle" v-for="n in 30" :key="n" 
+                     :style="{ 
+                       left: Math.random() * 100 + '%', 
+                       top: Math.random() * 100 + '%',
+                       animationDelay: Math.random() * 10 + 's'
+                     }">✨</div>
+              </div>
+              
+              <!-- 漂浮爱心 -->
+              <div class="floating-love">
+                <div class="love-heart" v-for="n in 10" :key="n" 
+                     :style="{ 
+                       left: (n * 10 + Math.random() * 8) + '%', 
+                       animationDelay: (n * 1.5 + Math.random() * 3) + 's'
+                     }">💝</div>
+              </div>
+              
+              <!-- 许愿泡泡 -->
+              <div class="dream-bubbles">
+                <div class="dream-bubble" v-for="n in 15" :key="n" 
+                     :style="{ 
+                       left: (n * 6 + Math.random() * 10) + '%', 
+                       animationDelay: (n * 0.8 + Math.random() * 4) + 's'
+                     }">
+                  <div class="bubble-inner"></div>
+                  <div class="bubble-reflection"></div>
+                </div>
+              </div>
+              
+              <!-- 魔法星尘 -->
+              <div class="magic-stardust">
+                <div class="stardust" v-for="n in 40" :key="n" 
+                     :style="{ 
+                       left: Math.random() * 100 + '%', 
+                       top: Math.random() * 100 + '%',
+                       animationDelay: Math.random() * 12 + 's'
+                     }">⭐</div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -396,15 +576,6 @@
         </div>
       </div>
       
-      <div class="activities" v-show="showActivities">
-        <div class="activity" v-for="(activity, index) in activities" :key="index" 
-             :class="{ active: currentActivity === index }"
-             :style="{ left: activity.position }">
-          <div class="activity-icon">{{ activity.icon }}</div>
-          <div class="activity-text">{{ activity.text }}</div>
-        </div>
-      </div>
-      
       <div class="love-bubbles" v-show="showBubbles">
         <div v-for="n in 8" :key="n" class="bubble" 
              :style="{ 
@@ -414,6 +585,16 @@
              }">
           💖
         </div>
+      </div>
+    </div>
+    
+    <!-- Activities 区域移到 scene-wrapper 外部 -->
+    <div class="activities" v-show="showActivities">
+      <div class="activity" v-for="(activity, index) in activities" :key="index" 
+           :class="{ active: currentActivity === index }"
+           :style="{ left: activity.position }">
+        <div class="activity-icon">{{ activity.icon }}</div>
+        <div class="activity-text">{{ activity.text }}</div>
       </div>
     </div>
     
@@ -457,7 +638,7 @@ const currentBackground = ref('default')
 
 const activities = [
   { icon: '☕', text: '喝下午茶聊天', position: '10%', background: 'cafe' },
-  { icon: '🚶‍♂️🚶‍♀️', text: '漫步公园', position: '30%', background: 'park' },
+  { icon: '🚶‍♂️', text: '漫步公园', position: '30%', background: 'park' },
   { icon: '🍲', text: '热情火锅', position: '50%', background: 'hotpot' },
   { icon: '🌃', text: '夜景漫步', position: '70%', background: 'night' },
   { icon: '🌟', text: '许下心愿', position: '90%', background: 'starry' }
@@ -600,6 +781,7 @@ onMounted(() => {
   width: 100%;
   max-width: 900px;
   height: 600px;
+  margin-top: 80px;
   margin-bottom: 2rem;
 }
 
@@ -740,7 +922,6 @@ onMounted(() => {
     radial-gradient(circle at 45% 75%, #FFD700 1px, transparent 1px),
     radial-gradient(circle at 95% 85%, #FFFFFF 1.5px, transparent 1.5px);
   background-size: 150px 150px;
-  animation: magical-stars 6s infinite ease-in-out;
 }
 
 @keyframes magical-stars {
@@ -3121,149 +3302,939 @@ onMounted(() => {
   50% { box-shadow: 0 0 50px rgba(255,250,240,1); }
 }
 
-/* 星空装饰元素 */
-.starry-elements {
+/* 流星雨许愿场景 - 全新设计 */
+.starry-wishing-scene {
   position: absolute;
   width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
-.cosmic-scene {
+/* 深邃星空背景 */
+.deep-space-bg {
   position: absolute;
   width: 100%;
   height: 100%;
+  background: linear-gradient(to bottom, 
+    #000428 0%, 
+    #004e92 15%, 
+    #191970 35%, 
+    #1e3c72 60%, 
+    #2a5298 85%, 
+    #000428 100%);
 }
 
-.shooting-stars {
+@keyframes cosmic-breathing {
+  0%, 100% { 
+    background: linear-gradient(to bottom, 
+      #000428 0%, 
+      #004e92 15%, 
+      #191970 35%, 
+      #1e3c72 60%, 
+      #2a5298 85%, 
+      #000428 100%);
+  }
+  50% { 
+    background: linear-gradient(to bottom, 
+      #001122 0%, 
+      #002244 15%, 
+      #112244 35%, 
+      #1a2c52 60%, 
+      #224488 85%, 
+      #001122 100%);
+  }
+}
+
+/* 背景繁星 */
+.background-stars {
   position: absolute;
-  top: 10%;
   width: 100%;
-  height: 50%;
+  height: 100%;
+  z-index: 1;
+}
+
+.bg-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  animation: star-twinkle 4s infinite ease-in-out;
+  box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+@keyframes star-twinkle {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(0.8);
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.8);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 8px rgba(255, 255, 255, 1);
+  }
+}
+
+/* 壮观流星雨 */
+.epic-meteor-shower {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  z-index: 2;
 }
 
 .shooting-star {
   position: absolute;
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, #FFFFFF, transparent);
-  animation: shooting-star-move 6s infinite ease-out;
+  animation: epic-meteor-fall infinite linear;
 }
 
-.shooting-star:nth-child(1) {
-  top: 20%;
-  left: 10%;
-  animation-delay: 0s;
+/* 主要流星 - 增强细节 */
+.major-meteor {
+  width: 8px;
+  height: 200px;
+  transform: rotate(30deg);
 }
 
-.shooting-star:nth-child(2) {
-  top: 60%;
-  left: 70%;
-  animation-delay: 2s;
+.major-meteor .meteor-head {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, 
+    #FFFFFF 0%, 
+    #F0F8FF 15%,
+    #E6F3FF 35%, 
+    #B3D9FF 60%,
+    #80BFFF 80%,
+    transparent 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 20px #FFFFFF,
+    0 0 40px #B3D9FF,
+    0 0 60px #4169E1,
+    inset 2px 2px 4px rgba(255,255,255,0.8);
+  animation: meteor-head-shimmer 1.5s infinite ease-in-out;
 }
 
-.shooting-star:nth-child(3) {
-  top: 40%;
-  left: 40%;
-  animation-delay: 4s;
+.major-meteor .meteor-trail-long {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, 
+    rgba(255, 255, 255, 1) 0%,
+    rgba(240, 248, 255, 0.95) 8%,
+    rgba(230, 243, 255, 0.85) 20%,
+    rgba(179, 217, 255, 0.65) 45%,
+    rgba(128, 191, 255, 0.45) 75%,
+    rgba(100, 149, 237, 0.25) 90%,
+    transparent 100%);
+  border-radius: 50% 0 0 50%;
+  filter: blur(0.5px);
+  animation: trail-intensity 2s infinite ease-in-out;
 }
 
-@keyframes shooting-star-move {
+/* 添加流星拖尾的内核层 */
+.major-meteor .meteor-trail-long::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 60%;
+  height: 80%;
+  background: linear-gradient(to top, 
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(230, 243, 255, 0.7) 25%,
+    rgba(179, 217, 255, 0.5) 60%,
+    transparent 100%);
+  border-radius: 50% 0 0 50%;
+}
+
+.major-meteor .meteor-glow {
+  position: absolute;
+  bottom: -8px;
+  right: -8px;
+  width: 28px;
+  height: 28px;
+  background: radial-gradient(circle, 
+    rgba(255, 255, 255, 0.6) 0%,
+    rgba(179, 217, 255, 0.4) 30%,
+    rgba(128, 191, 255, 0.25) 60%,
+    rgba(65, 105, 225, 0.1) 80%,
+    transparent 100%);
+  border-radius: 50%;
+  animation: meteor-glow-pulse 2s infinite ease-in-out;
+  filter: blur(1px);
+}
+
+/* 添加大气层燃烧效果 */
+.major-meteor .meteor-plasma {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: 18px;
+  height: 18px;
+  background: radial-gradient(circle, 
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(135, 206, 250, 0.7) 30%,
+    rgba(70, 130, 180, 0.5) 60%,
+    transparent 100%);
+  border-radius: 50%;
+  animation: plasma-flicker 0.8s infinite ease-in-out;
+}
+
+@keyframes meteor-head-shimmer {
+  0%, 100% { 
+    box-shadow: 
+      0 0 20px #FFFFFF,
+      0 0 40px #B3D9FF,
+      0 0 60px #4169E1,
+      inset 2px 2px 4px rgba(255,255,255,0.8);
+  }
+  50% { 
+    box-shadow: 
+      0 0 30px #FFFFFF,
+      0 0 60px #B3D9FF,
+      0 0 90px #4169E1,
+      inset 3px 3px 6px rgba(255,255,255,1);
+  }
+}
+
+@keyframes trail-intensity {
+  0%, 100% { 
+    opacity: 0.9;
+    filter: blur(0.5px);
+  }
+  50% { 
+    opacity: 1;
+    filter: blur(0.3px);
+  }
+}
+
+@keyframes plasma-flicker {
+  0%, 100% { 
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  25% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  75% {
+    opacity: 0.9;
+    transform: scale(0.95);
+  }
+}
+
+@keyframes epic-meteor-fall {
   0% {
     opacity: 0;
-    transform: translateX(-100px) translateY(0) rotate(45deg);
+    transform: translateX(-120px) translateY(-180px) rotate(30deg) scale(0.3);
   }
-  10% {
-    opacity: 1;
+  3% {
+    opacity: 0.3;
+    transform: translateX(-80px) translateY(-140px) rotate(30deg) scale(0.6);
   }
-  90% {
+  8% {
     opacity: 1;
-    transform: translateX(200px) translateY(-100px) rotate(45deg);
+    transform: translateX(-40px) translateY(-100px) rotate(30deg) scale(1);
+  }
+  92% {
+    opacity: 1;
+    transform: translateX(calc(100vw - 40px)) translateY(calc(100vh - 100px)) rotate(30deg) scale(1);
+  }
+  97% {
+    opacity: 0.6;
+    transform: translateX(calc(100vw + 20px)) translateY(calc(100vh + 60px)) rotate(30deg) scale(0.8);
   }
   100% {
     opacity: 0;
-    transform: translateX(300px) translateY(-150px) rotate(45deg);
+    transform: translateX(calc(100vw + 120px)) translateY(calc(100vh + 180px)) rotate(30deg) scale(0.2);
   }
 }
 
-.constellation {
-  position: absolute;
-  top: 20%;
-  width: 100%;
-  height: 60%;
-}
-
-.star-cluster {
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  background: 
-    radial-gradient(circle at 20% 30%, #FFD700 1px, transparent 1px),
-    radial-gradient(circle at 60% 20%, #FFFFFF 1px, transparent 1px),
-    radial-gradient(circle at 80% 70%, #FFD700 1px, transparent 1px),
-    radial-gradient(circle at 30% 80%, #FFFFFF 1px, transparent 1px),
-    radial-gradient(circle at 70% 50%, #FFD700 1px, transparent 1px);
-  background-size: 100% 100%;
-  animation: constellation-twinkle 8s infinite ease-in-out;
-}
-
-.star-cluster:nth-child(1) { top: 10%; left: 20%; }
-.star-cluster:nth-child(2) { top: 40%; left: 70%; }
-.star-cluster:nth-child(3) { top: 70%; left: 10%; }
-.star-cluster:nth-child(4) { top: 20%; left: 80%; }
-
-@keyframes constellation-twinkle {
-  0%, 100% { opacity: 0.8; transform: scale(1); }
-  33% { opacity: 1; transform: scale(1.1); }
-  66% { opacity: 0.6; transform: scale(0.9); }
-}
-
-.crescent-moon {
-  position: absolute;
-  top: 25%;
-  right: 20%;
-  width: 50px;
-  height: 50px;
-  background: radial-gradient(circle at 30% 30%, #FFFAF0, #F0E68C);
-  border-radius: 50%;
-  box-shadow: 0 0 40px rgba(255,250,240,0.9);
-  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 80%, 0% 20%);
-  animation: crescent-glow 10s infinite ease-in-out;
-}
-
-@keyframes crescent-glow {
+@keyframes meteor-glow-pulse {
   0%, 100% { 
-    box-shadow: 0 0 40px rgba(255,250,240,0.9);
+    opacity: 0.8;
     transform: scale(1);
   }
   50% { 
-    box-shadow: 0 0 60px rgba(255,250,240,1);
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* 中等流星 - 精细设计 */
+.regular-meteor {
+  width: 5px;
+  height: 120px;
+  transform: rotate(35deg);
+}
+
+.regular-meteor .meteor-head {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, 
+    #FFFFFF 0%, 
+    #F0F8FF 20%,
+    #E6F3FF 45%, 
+    #B3D9FF 70%,
+    transparent 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 12px #FFFFFF,
+    0 0 24px #B3D9FF,
+    0 0 36px #87CEEB;
+  animation: medium-meteor-shine 1.8s infinite ease-in-out;
+}
+
+.regular-meteor .meteor-trail-medium {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, 
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(240, 248, 255, 0.8) 12%,
+    rgba(230, 243, 255, 0.65) 30%,
+    rgba(179, 217, 255, 0.45) 60%,
+    rgba(135, 206, 235, 0.25) 85%,
+    transparent 100%);
+  border-radius: 50% 0 0 50%;
+  filter: blur(0.3px);
+}
+
+.regular-meteor .meteor-glow {
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  width: 16px;
+  height: 16px;
+  background: radial-gradient(circle, 
+    rgba(255, 255, 255, 0.5) 0%,
+    rgba(179, 217, 255, 0.3) 40%,
+    rgba(135, 206, 235, 0.2) 70%,
+    transparent 100%);
+  border-radius: 50%;
+  animation: meteor-glow-pulse 2.2s infinite ease-in-out;
+}
+
+/* 快速流星 - 精细设计 */
+.fast-meteor {
+  width: 3px;
+  height: 80px;
+  transform: rotate(40deg);
+}
+
+.fast-meteor .meteor-head {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 5px;
+  height: 5px;
+  background: radial-gradient(circle, 
+    #FFFFFF 0%, 
+    #F0F8FF 30%,
+    #E6F3FF 70%,
+    transparent 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 8px #FFFFFF,
+    0 0 16px #E6F3FF;
+  animation: fast-meteor-flicker 1s infinite ease-in-out;
+}
+
+.fast-meteor .meteor-trail-short {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, 
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(240, 248, 255, 0.6) 20%,
+    rgba(230, 243, 255, 0.4) 50%,
+    rgba(176, 196, 222, 0.2) 80%,
+    transparent 100%);
+  border-radius: 50% 0 0 50%;
+  filter: blur(0.2px);
+}
+
+.fast-meteor .meteor-glow {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 9px;
+  height: 9px;
+  background: radial-gradient(circle, 
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(240, 248, 255, 0.2) 60%,
+    transparent 100%);
+  border-radius: 50%;
+  animation: meteor-glow-pulse 1.5s infinite ease-in-out;
+}
+
+@keyframes medium-meteor-shine {
+  0%, 100% { 
+    box-shadow: 
+      0 0 12px #FFFFFF,
+      0 0 24px #B3D9FF,
+      0 0 36px #87CEEB;
+  }
+  50% { 
+    box-shadow: 
+      0 0 18px #FFFFFF,
+      0 0 36px #B3D9FF,
+      0 0 54px #87CEEB;
+  }
+}
+
+@keyframes fast-meteor-flicker {
+  0%, 100% { 
+    opacity: 0.9;
+    box-shadow: 
+      0 0 8px #FFFFFF,
+      0 0 16px #E6F3FF;
+  }
+  30% {
+    opacity: 1;
+    box-shadow: 
+      0 0 12px #FFFFFF,
+      0 0 24px #E6F3FF;
+  }
+  70% {
+    opacity: 0.85;
+    box-shadow: 
+      0 0 6px #FFFFFF,
+      0 0 12px #E6F3FF;
+  }
+}
+
+/* 许愿星（特殊效果） */
+.wishing-stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+}
+
+.wishing-star {
+  position: absolute;
+  width: 8px;
+  height: 120px;
+  transform: rotate(35deg);
+  animation: wishing-star-fall 8s infinite ease-in-out;
+}
+
+.wish-glow {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 12px;
+  height: 12px;
+  background: radial-gradient(circle, 
+    #FFD700 0%, 
+    #FFA500 30%, 
+    #FF69B4 60%, 
+    transparent 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 20px #FFD700,
+    0 0 40px #FFA500,
+    0 0 60px #FF69B4;
+  animation: wish-pulse 2s infinite ease-in-out;
+}
+
+.wish-trail {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, 
+    rgba(255, 215, 0, 0.9) 0%,
+    rgba(255, 165, 0, 0.7) 15%,
+    rgba(255, 105, 180, 0.5) 40%,
+    rgba(138, 43, 226, 0.3) 70%,
+    transparent 100%);
+  border-radius: 50% 0 0 50%;
+}
+
+.wish-sparkles {
+  position: absolute;
+  width: 200%;
+  height: 200%;
+  top: -50%;
+  left: -50%;
+}
+
+.sparkle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #FFD700;
+  border-radius: 50%;
+  animation: sparkle-twinkle 1.5s infinite ease-in-out;
+}
+
+.sparkle:nth-child(1) { left: 20%; top: 30%; animation-delay: 0s; }
+.sparkle:nth-child(2) { left: 60%; top: 20%; animation-delay: 0.2s; }
+.sparkle:nth-child(3) { left: 80%; top: 50%; animation-delay: 0.4s; }
+.sparkle:nth-child(4) { left: 40%; top: 70%; animation-delay: 0.6s; }
+.sparkle:nth-child(5) { left: 10%; top: 60%; animation-delay: 0.8s; }
+.sparkle:nth-child(6) { left: 70%; top: 80%; animation-delay: 1s; }
+.sparkle:nth-child(7) { left: 30%; top: 10%; animation-delay: 1.2s; }
+.sparkle:nth-child(8) { left: 90%; top: 40%; animation-delay: 1.4s; }
+
+@keyframes wishing-star-fall {
+  0% {
+    opacity: 0;
+    transform: rotate(35deg) translateX(-80px) translateY(-150px) scale(0.5);
+  }
+  10% {
+    opacity: 1;
+    transform: rotate(35deg) translateX(-40px) translateY(-100px) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(35deg) translateX(100px) translateY(50px) scale(1.2);
+  }
+  90% {
+    opacity: 1;
+    transform: rotate(35deg) translateX(200px) translateY(150px) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(35deg) translateX(300px) translateY(250px) scale(0.3);
+  }
+}
+
+@keyframes wish-pulse {
+  0%, 100% { 
+    transform: scale(1);
+    box-shadow: 0 0 20px #FFD700, 0 0 40px #FFA500, 0 0 60px #FF69B4;
+  }
+  50% { 
+    transform: scale(1.3);
+    box-shadow: 0 0 30px #FFD700, 0 0 60px #FFA500, 0 0 90px #FF69B4;
+  }
+}
+
+@keyframes sparkle-twinkle {
+  0%, 100% { 
+    opacity: 0.3; 
+    transform: scale(0.5);
+  }
+  50% { 
+    opacity: 1; 
+    transform: scale(1.2);
+  }
+}
+
+/* 星座背景 */
+.star-background {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.star-field {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.static-star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: #FFFFFF;
+  border-radius: 50%;
+  animation: star-twinkle 3s infinite ease-in-out;
+}
+
+@keyframes star-twinkle {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.constellation-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.constellation-group {
+  position: absolute;
+  width: 80px;
+  height: 60px;
+}
+
+.star-point {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #FFD700;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #FFD700;
+  animation: constellation-pulse 4s infinite ease-in-out;
+}
+
+.connect-line {
+  position: absolute;
+  height: 1px;
+  background: linear-gradient(to right, 
+    transparent 0%, 
+    rgba(255, 215, 0, 0.6) 20%, 
+    rgba(255, 215, 0, 0.8) 50%, 
+    rgba(255, 215, 0, 0.6) 80%, 
+    transparent 100%);
+  animation: line-glow 5s infinite ease-in-out;
+}
+
+.line-1 {
+  top: 5px;
+  left: 5px;
+  width: 25px;
+  transform: rotate(15deg);
+}
+
+.line-2 {
+  top: 10px;
+  left: 30px;
+  width: 22px;
+  transform: rotate(-10deg);
+}
+
+.line-3 {
+  top: 12px;
+  left: 50px;
+  width: 18px;
+  transform: rotate(25deg);
+}
+
+.line-4 {
+  top: 10px;
+  left: 10px;
+  width: 15px;
+  transform: rotate(45deg);
+}
+
+.line-5 {
+  top: 15px;
+  left: 20px;
+  width: 20px;
+  transform: rotate(-30deg);
+}
+
+.line-6 {
+  top: 2px;
+  left: 25px;
+  width: 18px;
+  transform: rotate(70deg);
+}
+
+@keyframes constellation-pulse {
+  0%, 100% { 
+    opacity: 0.8;
+    transform: scale(1);
+    box-shadow: 0 0 8px #FFD700;
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.3);
+    box-shadow: 0 0 16px #FFD700;
+  }
+}
+
+@keyframes line-glow {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 0.9; }
+}
+
+/* 浪漮月亮 */
+.romantic-moon {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 80px;
+  height: 80px;
+  z-index: 2;
+}
+
+.moon-body {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 35% 35%, 
+    #FFFAF0 0%, 
+    #F0E68C 40%, 
+    #DDD68C 70%, 
+    #C8B568 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 30px rgba(255, 250, 240, 0.8),
+    0 0 60px rgba(240, 230, 140, 0.6),
+    inset -10px -10px 0 rgba(200, 181, 104, 0.3);
+  animation: moon-gentle-glow 8s infinite ease-in-out;
+}
+
+.moon-crater {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(200, 181, 104, 0.6);
+  border-radius: 50%;
+  box-shadow: inset 2px 2px 4px rgba(160, 140, 80, 0.8);
+}
+
+.moon-glow-ring {
+  position: absolute;
+  width: 120%;
+  height: 120%;
+  top: -10%;
+  left: -10%;
+  border-radius: 50%;
+  background: radial-gradient(circle, 
+    transparent 70%, 
+    rgba(255, 250, 240, 0.2) 80%, 
+    rgba(255, 250, 240, 0.1) 90%, 
+    transparent 100%);
+  animation: glow-ring-pulse 6s infinite ease-in-out;
+}
+
+.moon-beam {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  height: 2px;
+  background: linear-gradient(to right, 
+    transparent 0%, 
+    rgba(255, 250, 240, 0.1) 30%, 
+    rgba(255, 250, 240, 0.2) 50%, 
+    rgba(255, 250, 240, 0.1) 70%, 
+    transparent 100%);
+  transform-origin: 0 50%;
+}
+
+@keyframes moon-gentle-glow {
+  0%, 100% { 
+    box-shadow: 0 0 30px rgba(255, 250, 240, 0.8), 0 0 60px rgba(240, 230, 140, 0.6);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(255, 250, 240, 1), 0 0 80px rgba(240, 230, 140, 0.8);
     transform: scale(1.05);
   }
 }
 
-.galaxy-swirl {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 200px;
-  height: 200px;
-  background: 
-    radial-gradient(ellipse 40% 60% at 40% 60%, 
-      rgba(138, 43, 226, 0.4) 0%, 
-      rgba(75, 0, 130, 0.3) 30%, 
-      transparent 70%),
-    radial-gradient(ellipse 60% 40% at 60% 40%, 
-      rgba(25, 25, 112, 0.3) 0%, 
-      rgba(72, 61, 139, 0.2) 40%, 
-      transparent 80%);
-  border-radius: 50%;
-  animation: galaxy-rotation 20s infinite linear;
+@keyframes glow-ring-pulse {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.1);
+  }
 }
 
-@keyframes galaxy-rotation {
+/* 浪漮氛围效果 */
+.romantic-atmosphere {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.love-stardust {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.stardust-particle {
+  position: absolute;
+  font-size: 12px;
+  animation: stardust-float 10s infinite ease-in-out;
+}
+
+@keyframes stardust-float {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.5);
+  }
+  20% {
+    opacity: 0.8;
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-30px) scale(1.2);
+  }
+  80% {
+    opacity: 0.6;
+    transform: translateY(-60px) scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-80px) scale(0.3);
+  }
+}
+
+.floating-hearts {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.heart-shape {
+  position: absolute;
+  bottom: -10%;
+  font-size: 16px;
+  animation: heart-float 12s infinite ease-in-out;
+}
+
+@keyframes heart-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.8);
+  }
+  15% {
+    opacity: 0.8;
+    transform: translateY(-50px) scale(1);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-120px) scale(1.1);
+  }
+  50% {
+    opacity: 0.9;
+    transform: translateY(-200px) scale(1.2);
+  }
+  70% {
+    opacity: 0.7;
+    transform: translateY(-300px) scale(1);
+  }
+  85% {
+    opacity: 0.4;
+    transform: translateY(-400px) scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-500px) scale(0.5);
+  }
+}
+
+.wish-bubbles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.wish-bubble {
+  position: absolute;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(173, 216, 230, 0.6) 40%,
+    rgba(138, 43, 226, 0.4) 70%,
+    transparent 100%);
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  animation: bubble-rise 15s infinite ease-out;
+}
+
+.bubble-shine {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  animation: shine-pulse 2s infinite ease-in-out;
+}
+
+@keyframes bubble-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.3);
+  }
+  10% {
+    opacity: 0.7;
+    transform: translateY(-50px) scale(0.6);
+  }
+  30% {
+    opacity: 1;
+    transform: translateY(-150px) scale(1);
+  }
+  60% {
+    opacity: 0.8;
+    transform: translateY(-300px) scale(1.1);
+  }
+  85% {
+    opacity: 0.4;
+    transform: translateY(-450px) scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-600px) scale(0.2);
+  }
+}
+
+@keyframes shine-pulse {
+  0%, 100% { 
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes beam-rotate {
   0% { transform: translate(-50%, -50%) rotate(0deg); }
   100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* 场景切换优化 */
+.starry-elements {
+  transition: opacity 1.5s ease-in-out;
+}
+
+.starry-elements.active {
+  opacity: 1;
+}
+
+/* 性能优化 */
+.meteor, .wishing-star, .static-star {
+  will-change: transform, opacity;
+}
+
+.moon-body, .romantic-atmosphere * {
+  will-change: transform;
 }
 
 .couple {
@@ -3827,9 +4798,13 @@ onMounted(() => {
 
 .activities {
   position: absolute;
-  top: 10%;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
-  height: 30%;
+  max-width: 900px;
+  height: 60px;
+  z-index: 10;
 }
 
 .activity {
@@ -5287,5 +6262,545 @@ onMounted(() => {
 .customer-gif.customer-waiting-2 {
   left: 25%;
   bottom: 12%;
+}
+
+/* =============================================
+   真实流星许愿系统 - 全新设计
+   ============================================= */
+
+/* 基础容器 */
+.realistic-wishing-stars {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  overflow: hidden;
+}
+
+/* 主许愿流星 */
+.primary-wishing-star {
+  position: absolute;
+  width: 8px;
+  height: 250px;
+  transform: rotate(28deg);
+  animation: primary-meteor-journey 12s infinite ease-out;
+  z-index: 5;
+}
+
+/* 次要许愿流星 */
+.secondary-wishing-star {
+  position: absolute;
+  width: 6px;
+  height: 180px;
+  transform: rotate(32deg);
+  animation: secondary-meteor-journey 10s infinite ease-out;
+  z-index: 4;
+}
+
+/* 远程许愿流星 */
+.distant-wishing-star {
+  position: absolute;
+  width: 4px;
+  height: 120px;
+  transform: rotate(30deg);
+  animation: distant-meteor-journey 8s infinite ease-out;
+  z-index: 3;
+}
+
+/* 流星核心 */
+.meteor-head {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+/* 核心亮光 */
+.primary-wishing-star .meteor-head .core-bright {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  background: radial-gradient(circle,
+    #FFFFFF 0%,
+    #FFF8DC 25%,
+    #FFE4B5 50%,
+    #DDA0DD 75%,
+    #FF69B4 90%,
+    transparent 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 10px #FFFFFF,
+    0 0 20px #FFE4B5,
+    0 0 30px #DDA0DD,
+    0 0 40px #FF69B4,
+    inset 1px 1px 3px rgba(255, 255, 255, 0.9);
+  animation: primary-core-radiance 2s infinite ease-in-out;
+}
+
+.secondary-wishing-star .meteor-head .core-bright {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background: radial-gradient(circle,
+    #FFFFFF 0%,
+    #E0E6FF 30%,
+    #B0C4DE 60%,
+    #87CEEB 85%,
+    transparent 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 8px #FFFFFF,
+    0 0 16px #B0C4DE,
+    0 0 24px #87CEEB,
+    inset 1px 1px 2px rgba(255, 255, 255, 0.8);
+  animation: secondary-core-radiance 2.2s infinite ease-in-out;
+}
+
+.distant-wishing-star .meteor-head .core-bright {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 6px;
+  height: 6px;
+  background: radial-gradient(circle,
+    #FFFFFF 0%,
+    #F5F5F5 40%,
+    #DCDCDC 70%,
+    transparent 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 5px #FFFFFF,
+    0 0 10px #F5F5F5,
+    inset 1px 1px 1px rgba(255, 255, 255, 0.7);
+  animation: distant-core-radiance 2.5s infinite ease-in-out;
+}
+
+/* 核心光晕 */
+.meteor-head .core-glow {
+  position: absolute;
+  bottom: -3px;
+  right: -3px;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  background: radial-gradient(circle,
+    rgba(255, 255, 255, 0.4) 0%,
+    rgba(255, 255, 255, 0.2) 30%,
+    rgba(255, 255, 255, 0.1) 60%,
+    transparent 100%);
+  border-radius: 50%;
+  filter: blur(2px);
+  animation: core-glow-pulse 1.8s infinite ease-in-out;
+}
+
+/* 流星拖尾 */
+.meteor-tail {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 主流星拖尾渐变 */
+.primary-wishing-star .meteor-tail .tail-gradient {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(255, 248, 220, 0.95) 5%,
+    rgba(255, 228, 181, 0.85) 15%,
+    rgba(221, 160, 221, 0.7) 35%,
+    rgba(255, 105, 180, 0.5) 55%,
+    rgba(255, 105, 180, 0.3) 75%,
+    rgba(255, 105, 180, 0.1) 90%,
+    transparent 100%);
+  border-radius: 50% 0 0 50%;
+  filter: blur(0.8px);
+  animation: primary-tail-flow 2.5s infinite ease-in-out;
+}
+
+.secondary-wishing-star .meteor-tail .tail-gradient {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(224, 230, 255, 0.8) 8%,
+    rgba(176, 196, 222, 0.65) 25%,
+    rgba(135, 206, 235, 0.45) 50%,
+    rgba(135, 206, 235, 0.25) 75%,
+    transparent 100%);
+  border-radius: 50% 0 0 50%;
+  filter: blur(0.6px);
+  animation: secondary-tail-flow 2.8s infinite ease-in-out;
+}
+
+.distant-wishing-star .meteor-tail .tail-gradient {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(245, 245, 245, 0.5) 15%,
+    rgba(220, 220, 220, 0.3) 40%,
+    rgba(220, 220, 220, 0.15) 70%,
+    transparent 100%);
+  border-radius: 50% 0 0 50%;
+  filter: blur(0.4px);
+  animation: distant-tail-flow 3s infinite ease-in-out;
+}
+
+/* 真实流星动画定义 */
+@keyframes primary-meteor-journey {
+  0% {
+    opacity: 0;
+    transform: translateX(-200px) translateY(-300px) rotate(28deg) scale(0.3);
+  }
+  5% {
+    opacity: 0.4;
+    transform: translateX(-150px) translateY(-250px) rotate(28deg) scale(0.6);
+  }
+  15% {
+    opacity: 1;
+    transform: translateX(-80px) translateY(-180px) rotate(28deg) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: translateX(calc(100vw + 50px)) translateY(calc(100vh + 100px)) rotate(28deg) scale(1.2);
+  }
+  95% {
+    opacity: 0.6;
+    transform: translateX(calc(100vw + 120px)) translateY(calc(100vh + 200px)) rotate(28deg) scale(0.8);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(calc(100vw + 250px)) translateY(calc(100vh + 350px)) rotate(28deg) scale(0.2);
+  }
+}
+
+@keyframes secondary-meteor-journey {
+  0% {
+    opacity: 0;
+    transform: translateX(-150px) translateY(-250px) rotate(32deg) scale(0.4);
+  }
+  8% {
+    opacity: 0.8;
+    transform: translateX(-80px) translateY(-180px) rotate(32deg) scale(0.9);
+  }
+  92% {
+    opacity: 0.8;
+    transform: translateX(calc(100vw + 30px)) translateY(calc(100vh + 80px)) rotate(32deg) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(calc(100vw + 180px)) translateY(calc(100vh + 280px)) rotate(32deg) scale(0.3);
+  }
+}
+
+@keyframes distant-meteor-journey {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px) translateY(-180px) rotate(30deg) scale(0.5);
+  }
+  10% {
+    opacity: 0.6;
+    transform: translateX(-50px) translateY(-130px) rotate(30deg) scale(0.8);
+  }
+  90% {
+    opacity: 0.6;
+    transform: translateX(calc(100vw + 20px)) translateY(calc(100vh + 60px)) rotate(30deg) scale(0.9);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(calc(100vw + 120px)) translateY(calc(100vh + 200px)) rotate(30deg) scale(0.2);
+  }
+}
+
+@keyframes primary-core-radiance {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 0 10px #FFFFFF,
+      0 0 20px #FFE4B5,
+      0 0 30px #DDA0DD,
+      0 0 40px #FF69B4,
+      inset 1px 1px 3px rgba(255, 255, 255, 0.9);
+  }
+  50% {
+    transform: scale(1.3);
+    box-shadow: 
+      0 0 15px #FFFFFF,
+      0 0 30px #FFE4B5,
+      0 0 45px #DDA0DD,
+      0 0 60px #FF69B4,
+      inset 2px 2px 4px rgba(255, 255, 255, 1);
+  }
+}
+
+@keyframes secondary-core-radiance {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 0 8px #FFFFFF,
+      0 0 16px #B0C4DE,
+      0 0 24px #87CEEB,
+      inset 1px 1px 2px rgba(255, 255, 255, 0.8);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 
+      0 0 12px #FFFFFF,
+      0 0 24px #B0C4DE,
+      0 0 36px #87CEEB,
+      inset 2px 2px 3px rgba(255, 255, 255, 0.9);
+  }
+}
+
+@keyframes distant-core-radiance {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 
+      0 0 5px #FFFFFF,
+      0 0 10px #F5F5F5,
+      inset 1px 1px 1px rgba(255, 255, 255, 0.7);
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 
+      0 0 8px #FFFFFF,
+      0 0 15px #F5F5F5,
+      inset 1px 1px 2px rgba(255, 255, 255, 0.8);
+  }
+}
+
+@keyframes core-glow-pulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+
+@keyframes primary-tail-flow {
+  0%, 100% {
+    opacity: 0.9;
+    filter: blur(0.8px);
+  }
+  30% {
+    opacity: 1;
+    filter: blur(0.5px);
+  }
+  70% {
+    opacity: 0.95;
+    filter: blur(0.7px);
+  }
+}
+
+@keyframes secondary-tail-flow {
+  0%, 100% {
+    opacity: 0.8;
+    filter: blur(0.6px);
+  }
+  50% {
+    opacity: 0.95;
+    filter: blur(0.4px);
+  }
+}
+
+@keyframes distant-tail-flow {
+  0%, 100% {
+    opacity: 0.7;
+    filter: blur(0.4px);
+  }
+  50% {
+    opacity: 0.85;
+    filter: blur(0.3px);
+  }
+}
+
+
+
+
+
+
+
+/* 浪漫月亮 */
+.dreamy-moon {
+  position: absolute;
+  top: 15%;
+  right: 15%;
+  width: 80px;
+  height: 80px;
+  z-index: 2;
+}
+
+.moon-orb {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.moon-surface {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at 35% 35%, 
+    #FFFAF0 0%, 
+    #F0E68C 40%, 
+    #DDD68C 70%, 
+    #C8B568 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 0 30px rgba(255, 250, 240, 0.8),
+    0 0 60px rgba(240, 230, 140, 0.6);
+  animation: moon-gentle-glow 8s infinite ease-in-out;
+}
+
+.crater {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: rgba(200, 181, 104, 0.6);
+  border-radius: 50%;
+}
+
+.crater:nth-child(1) { left: 25%; top: 30%; }
+.crater:nth-child(2) { left: 60%; top: 45%; }
+.crater:nth-child(3) { left: 40%; top: 65%; }
+.crater:nth-child(4) { left: 70%; top: 25%; }
+
+/* 许愿氛围 */
+.wishing-atmosphere {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.wish-particles .wish-particle {
+  position: absolute;
+  font-size: 12px;
+  animation: particle-float 10s infinite ease-in-out;
+}
+
+.floating-love .love-heart {
+  position: absolute;
+  bottom: -10%;
+  font-size: 16px;
+  animation: heart-float 12s infinite ease-in-out;
+}
+
+.dream-bubbles .dream-bubble {
+  position: absolute;
+  bottom: 0;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, 
+    rgba(255, 255, 255, 0.3) 0%,
+    rgba(173, 216, 230, 0.2) 50%,
+    transparent 100%);
+  border-radius: 50%;
+  animation: bubble-rise 15s infinite ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.bubble-inner {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  top: 20%;
+  left: 20%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.bubble-reflection {
+  position: absolute;
+  top: 25%;
+  left: 30%;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+}
+
+.magic-stardust .stardust {
+  position: absolute;
+  font-size: 8px;
+  animation: stardust-twinkle 8s infinite ease-in-out;
+}
+
+@keyframes particle-float {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.5);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-60px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-120px) scale(0.3);
+  }
+}
+
+@keyframes heart-float {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-300px) scale(1.2);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-600px) scale(0.5);
+  }
+}
+
+@keyframes bubble-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-400px) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-800px) scale(0.2);
+  }
+}
+
+@keyframes stardust-twinkle {
+  0%, 100% { 
+    opacity: 0.3;
+    transform: scale(0.5);
+  }
+  50% { 
+    opacity: 1;
+    transform: scale(1.2);
+  }
 }
 </style>
